@@ -1,7 +1,14 @@
+import 'react-native-gesture-handler';
 import React, { useReducer } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Categories from './components/Categories';
-import { NavigationContainer } from 
+import Items from './components/Items';
+import ItemShow from './components/ItemShow';
+import Navbar from './components/Navbar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { navigationRef } from './components/RootNavigation';
+
 import {
   CategoryContext, 
   categoriesReducer,
@@ -12,6 +19,8 @@ import {
   itemsReducer,
   itemState,
 } from './context/itemsReducer';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [categories, dispatchCategories] = useReducer(
@@ -25,11 +34,28 @@ export default function App() {
   );
 
   return (
-    <CategoryContext.Provider value={[categories, dispatchCategories]}>
-      <ItemContext.Provider value={[items, dispatchCategories]}>
-        <Categories />
-      </ItemContext.Provider>
-    </CategoryContext.Provider>
+    <NavigationContainer ref={navigationRef} >
+      <CategoryContext.Provider value={[categories, dispatchCategories]}>
+        <ItemContext.Provider value={[items, dispatchCategories]}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name='Categories'
+              component={Categories}
+            />
+            <Stack.Screen
+              name='Items'
+              component={Items}
+            />
+            <Stack.Screen
+              name='ItemShow'
+              component={ItemShow}
+            />
+          </Stack.Navigator>
+          <Navbar />
+          {/* <Categories /> */}
+        </ItemContext.Provider>
+      </CategoryContext.Provider>
+    </NavigationContainer>
   );
 }
 

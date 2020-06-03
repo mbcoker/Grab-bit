@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-const Category = ({name, id}) => {
+const Category = ({navigation, name, id}) => {
   return (
     <View>
-      <Text>{name}</Text>
+      <Button
+        title={name}
+        onPress={()=>{
+          navigation.navigate('Items', {category_id: id, navigation});
+        }}
+      />
     </View>
   )
 }
