@@ -7,8 +7,15 @@ const Navbar = (props) => {
     <View>
       <Text>Nav</Text>
       <Button
+        title="Home"
         onPress={()=>{
           navigate('Categories');
+        }}
+      />
+       <Button
+        title="Scanner"
+        onPress={()=>{
+          navigate('Scanner');
         }}
       />
     </View>

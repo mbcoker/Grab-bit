@@ -1,13 +1,15 @@
 import 'react-native-gesture-handler';
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Categories from './components/Categories';
 import Items from './components/Items';
 import ItemShow from './components/ItemShow';
 import Navbar from './components/Navbar';
+import Scanner from './components/Scanner';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './components/RootNavigation';
+import * as Permissions from 'expo-permissions';
 
 import {
   CategoryContext, 
@@ -33,6 +35,20 @@ export default function App() {
     itemState,
   );
 
+  async function getCameraPermission() {
+    // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
+    const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA);
+    if (status === 'granted') {
+      console.log('hit granted access')
+    } else {
+      throw new Error('Camera permission not granted');
+    }
+  }
+
+  useEffect(() => {
+    getCameraPermission();
+  }, [])
+
   return (
     <NavigationContainer ref={navigationRef} >
       <CategoryContext.Provider value={[categories, dispatchCategories]}>
@@ -49,6 +65,10 @@ export default function App() {
             <Stack.Screen
               name='ItemShow'
               component={ItemShow}
+            />
+            <Stack.Screen
+              name='Scanner'
+              component={Scanner}
             />
           </Stack.Navigator>
           <Navbar />
