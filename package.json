@@ -18,5 +18,19 @@
     "babel-preset-expo": "~8.1.0",
     "@babel/core": "^7.8.6"
   },
-  "private": true
+  "private": true,
+  "name": "Grab-bit",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grab-bit/Grab-bit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grab-bit/Grab-bit/issues"
+  },
+  "homepage": "https://github.com/Grab-bit/Grab-bit#readme"
 }
