@@ -19,13 +19,14 @@ const ItemForm = ({route}) => {
   let isNew = true;
   let oldId;
   let oldQuantity;
-  let oldCategory_id
+  let oldCategory_id = category_id;
 
   // Check if item is already in the store
   items.forEach(item => {
     // Check if items have the same name and brand
     if (item.name === name && item.brand === brand) {
       // Set the quantity, category_id, and id to be equal
+      console.log('item:',item)
       isNew = false;
       oldId = item.id;
       oldQuantity = item.quantity;
@@ -45,8 +46,6 @@ const ItemForm = ({route}) => {
   }
   
   const handleSubmit = () => {
-    console.log('selected value:', selectedValue)
-    console.log('categories:', categories)
     dispatchToItems(submitItem({
       id: itemId,
       name: itemName,
@@ -55,7 +54,7 @@ const ItemForm = ({route}) => {
       category_id: selectedValue,
     }));
     // Change to the selected category
-    navigate('Items',{category_id})
+    navigate('Categories')
   }
 
   const pickerItems = categories.map(category => {
