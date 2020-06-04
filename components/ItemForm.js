@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
-import {TextInput, View, Text} from 'react-native';
-import { Dropdown } from "react-native-material-dropdown";
+import React, { useState, useContext } from 'react';
+import {TextInput, View, Text, Button, Picker} from 'react-native';
 import { CategoryContext } from '../context/categoriesReducer';
 import { navigate } from '../utils/RootNavigation';
 
-const ItemForm = ({ name, quantity, brand, onList, category_id }) => {
+const ItemForm = ({route}) => {
+  const { name, quantity, brand, onList, category_id } = route.params;
   //dropdown with all cetegories
   //need access to categories and their ids to know which category the item belongs to
   const [{categories}, dispatchCategories] = useContext(
     CategoryContext
   );
-  const [name, setName] = useState(name);
-  const [quantity, setQuantity] = useState(quantity);
-  const [brand, setBrand] = useState(brand);
+  const [itemName, setItemName] = useState(name);
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+  const [itemBrand, setItemBrand] = useState(brand);
+  const [selectedValue, setSelectedValue] = useState(category_id || 'none');
+
 
   const handleQuantity = (value) => {
-    setQuantity(quantity + value)
+    setItemQuantity(Math.max(itemQuantity + value, 0))
   }
+  
+  const handleSubmit = () => {
+    
+  }
+
+  const pickerItems = categories.map(category => {
+    return (
+      <Picker.Item label={category.name} value={category.id} key={category.id}/>
+    )
+  })
 
   return (
     <View>
       <TextInput
+        onChangeText={(text) => setItemName(text)}
         value={name}
       />
-      <Dropdown
-        title="Category"
-        data={data}
-      />
-      <TextInput 
-        value={quantity}
+      <Picker
+        selectedValue={selectedValue}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="None Selected" value={'none'} />
+        {pickerItems}
+      </Picker>
+      <TextInput
+        onChangeText={(text) => setItemBrand(text)}
+        value={brand}
       />
       <Text>Quantity</Text>
       <Button 
@@ -38,6 +55,10 @@ const ItemForm = ({ name, quantity, brand, onList, category_id }) => {
       <Button 
         title="-"
         onPress={() => handleQuantity(-1)}
+      />
+      <Button 
+        title='ADD'
+        onPress={handleSubmit}
       />
     </View>
   )

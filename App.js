@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Categories from './components/Categories';
 import Items from './components/Items';
 import ItemShow from './components/ItemShow';
+import ItemForm from './components/ItemForm';
 import Navbar from './components/Navbar';
 import Scanner from './components/Scanner';
 import { NavigationContainer } from '@react-navigation/native';
@@ -59,6 +60,10 @@ export default function App() {
             <Stack.Screen
               name='Scanner'
               component={Scanner}
+            />
+            <Stack.Screen
+              name='ItemForm'
+              component={ItemForm}
             />
           </Stack.Navigator>
           <Navbar />
