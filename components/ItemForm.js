@@ -26,11 +26,13 @@ const ItemForm = ({route}) => {
   }
   
   const handleSubmit = () => {
+    console.log('selected value:', selectedValue)
+    console.log('categories:', categories)
     dispatchToItems(submitItem({
       name: itemName,
       brand: itemBrand,
       quantity: itemQuantity,
-      category_id,
+      category_id: +selectedValue,
     }));
     navigate('Items',{category_id})
   }

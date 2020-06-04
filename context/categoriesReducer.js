@@ -22,11 +22,12 @@ export const categoryState = {
 export const categoriesReducer = (state, action) => {
   Object.freeze(state)
   let categories = [...state.categories]
-  let lastId = state.lastId + 1;
-
+  let lastId;
+  
   switch(action.type) {
-
+    
     case actionTypes.ADD_CATEGORY:
+      lastId = state.lastId + 1;
 
       categories.push({
         name: action.payload.category,
