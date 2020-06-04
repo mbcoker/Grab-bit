@@ -15,9 +15,28 @@ const ItemForm = ({route}) => {
   const [{items}, dispatchToItems] = useContext(
     ItemContext
   );
+
+  let isNew = true;
+  let oldId;
+  let oldQuantity;
+  let oldCategory_id
+
+  // Check if item is already in the store
+  items.forEach(item => {
+    // Check if items have the same name and brand
+    if (item.name === name && item.brand === brand) {
+      // Set the quantity, category_id, and id to be equal
+      isNew = false;
+      oldId = item.id;
+      oldQuantity = item.quantity;
+      oldCategory_id = item.category_id;
+    }
+  });
+  
   const [itemName, setItemName] = useState(name);
-  const [itemQuantity, setItemQuantity] = useState(quantity);
+  const [itemQuantity, setItemQuantity] = useState(isNew ? quantity : oldQuantity);
   const [itemBrand, setItemBrand] = useState(brand);
+  const [itemId, setItemId] = useState(isNew ? id : oldId);
   const [selectedValue, setSelectedValue] = useState(category_id || categories[0].id);
 
 
@@ -29,11 +48,11 @@ const ItemForm = ({route}) => {
     console.log('selected value:', selectedValue)
     console.log('categories:', categories)
     dispatchToItems(submitItem({
-      id,
+      id: itemId,
       name: itemName,
       brand: itemBrand,
       quantity: itemQuantity,
-      category_id: +selectedValue,
+      category_id: selectedValue,
     }));
     // Change to the selected category
     navigate('Items',{category_id})
@@ -53,7 +72,7 @@ const ItemForm = ({route}) => {
       />
       <Picker
         selectedValue={selectedValue}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(+itemValue)}
       >
         {pickerItems}
       </Picker>
@@ -71,7 +90,7 @@ const ItemForm = ({route}) => {
         onPress={() => handleQuantity(-1)}
       />
       <Button 
-        title={id === null ? 'ADD ITEM': 'UPDATE ITEM'}
+        title={itemId === null ? 'ADD ITEM': 'UPDATE ITEM'}
         onPress={handleSubmit}
       />
     </View>

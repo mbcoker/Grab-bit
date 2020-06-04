@@ -51,17 +51,27 @@ export const itemsReducer = (state, action) => {
 
       // Remove original item information if new item is the same item
       
+      
       const item = {
         name,
         brand,
         quantity,
         category_id,
-        id: lastId,
+        id: id || lastId,
       }
 
-      console.log(item)
+      let isNew = true;
+      items.forEach((el, i) => {
+        if (el.id === item.id) {
+          isNew = false;
+          items[i] = item; 
+        }
+      });
+      
 
-      items.push(item);
+      console.log(items)
+
+      if (isNew) items.push(item);
       
       return {
         ...state,
