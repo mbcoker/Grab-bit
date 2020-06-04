@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import {TextInput, View, Text, Button, Picker} from 'react-native';
 import { CategoryContext } from '../context/categoriesReducer';
+import { ItemContext } from "../context/itemsReducer";
 import { navigate } from '../utils/RootNavigation';
+import { submitItem } from '../context/actions';
 
 const ItemForm = ({route}) => {
   const { name, quantity, brand, onList, category_id } = route.params;
@@ -9,6 +11,9 @@ const ItemForm = ({route}) => {
   //need access to categories and their ids to know which category the item belongs to
   const [{categories}, dispatchCategories] = useContext(
     CategoryContext
+  );
+  const [{items}, dispatchToItems] = useContext(
+    ItemContext
   );
   const [itemName, setItemName] = useState(name);
   const [itemQuantity, setItemQuantity] = useState(quantity);
@@ -21,7 +26,13 @@ const ItemForm = ({route}) => {
   }
   
   const handleSubmit = () => {
-    
+    dispatchToItems(submitItem({
+      name: itemName,
+      brand: itemBrand,
+      quantity: itemQuantity,
+      category_id,
+    }));
+    navigate('Items',{category_id})
   }
 
   const pickerItems = categories.map(category => {
@@ -34,7 +45,7 @@ const ItemForm = ({route}) => {
     <View>
       <TextInput
         onChangeText={(text) => setItemName(text)}
-        value={name}
+        value={itemName}
       />
       <Picker
         selectedValue={selectedValue}
@@ -45,9 +56,9 @@ const ItemForm = ({route}) => {
       </Picker>
       <TextInput
         onChangeText={(text) => setItemBrand(text)}
-        value={brand}
+        value={itemBrand}
       />
-      <Text>Quantity</Text>
+      <Text>Quantity: {itemQuantity}</Text>
       <Button 
         title="+"
         onPress={() => handleQuantity(1)}
@@ -57,7 +68,7 @@ const ItemForm = ({route}) => {
         onPress={() => handleQuantity(-1)}
       />
       <Button 
-        title='ADD'
+        title={onList ? 'UPDATE ITEM' : 'ADD ITEM'}
         onPress={handleSubmit}
       />
     </View>
