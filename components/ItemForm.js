@@ -18,7 +18,7 @@ const ItemForm = ({route}) => {
   const [itemName, setItemName] = useState(name);
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const [itemBrand, setItemBrand] = useState(brand);
-  const [selectedValue, setSelectedValue] = useState(category_id || 'none');
+  const [selectedValue, setSelectedValue] = useState(category_id || categories[0].id);
 
 
   const handleQuantity = (value) => {
@@ -34,6 +34,7 @@ const ItemForm = ({route}) => {
       quantity: itemQuantity,
       category_id: +selectedValue,
     }));
+    // Change to the selected category
     navigate('Items',{category_id})
   }
 
@@ -53,7 +54,6 @@ const ItemForm = ({route}) => {
         selectedValue={selectedValue}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
-        <Picker.Item label="None Selected" value={'none'} />
         {pickerItems}
       </Picker>
       <TextInput
