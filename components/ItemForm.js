@@ -6,7 +6,7 @@ import { navigate } from '../utils/RootNavigation';
 import { submitItem } from '../context/actions';
 
 const ItemForm = ({route}) => {
-  const { name, quantity, brand, onList, category_id } = route.params;
+  const { name, quantity, brand, category_id, id } = route.params;
   //dropdown with all cetegories
   //need access to categories and their ids to know which category the item belongs to
   const [{categories}, dispatchCategories] = useContext(
@@ -29,6 +29,7 @@ const ItemForm = ({route}) => {
     console.log('selected value:', selectedValue)
     console.log('categories:', categories)
     dispatchToItems(submitItem({
+      id,
       name: itemName,
       brand: itemBrand,
       quantity: itemQuantity,
@@ -70,7 +71,7 @@ const ItemForm = ({route}) => {
         onPress={() => handleQuantity(-1)}
       />
       <Button 
-        title={onList ? 'UPDATE ITEM' : 'ADD ITEM'}
+        title={id === null ? 'ADD ITEM': 'UPDATE ITEM'}
         onPress={handleSubmit}
       />
     </View>

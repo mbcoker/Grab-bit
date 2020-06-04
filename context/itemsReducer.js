@@ -46,7 +46,7 @@ export const itemsReducer = (state, action) => {
 
   switch(action.type) {
     case actionTypes.SUBMIT_ITEM:
-      const { name, brand, quantity, category_id } = action.payload;
+      const { name, brand, quantity, category_id, id } = action.payload;
       lastId = state.lastId + 1;
 
       // Remove original item information if new item is the same item

@@ -3,9 +3,20 @@ import { CategoryContext } from '../context/categoriesReducer';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import { processFontFamily } from 'expo-font';
 import { blue } from 'ansi-colors';
+import { navigate } from '../utils/RootNavigation';
 
 const ItemShow = ({ route }) => {
-  const { name, brand, quantity, notes } = route.params
+  const { name, brand, quantity, notes, category_id, id } = route.params
+
+  const navigateToItemForm = () => {
+    navigate('ItemForm', {
+      name,
+      brand,
+      quantity,
+      category_id,
+      id
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -22,7 +33,9 @@ const ItemShow = ({ route }) => {
       <Text style={styles.brand}>{brand}</Text>
       <Text style={{fontSize: 23}}>Notes:</Text>
       <Text style={styles.notes}>{notes}</Text>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={navigateToItemForm}
+      >
         <Text style={styles.editButton}>Edit</Text>
       </TouchableOpacity>
       <View style={styles.flexRow}>

@@ -33,8 +33,8 @@ const Items = ({ route, navigation }) => {
             name: '',
             brand: '',
             quantity: 0,
-            onList: false,
             category_id,
+            id: null,
           });
         }}
       />
