@@ -8,8 +8,8 @@ import Navbar from './components/Navbar';
 import Scanner from './components/Scanner';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { navigationRef } from './components/RootNavigation';
-import * as Permissions from 'expo-permissions';
+import { navigationRef } from './utils/RootNavigation';
+import { getCameraPermission } from './utils/permissions';
 
 import {
   CategoryContext, 
@@ -34,16 +34,6 @@ export default function App() {
     itemsReducer, 
     itemState,
   );
-
-  async function getCameraPermission() {
-    // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
-    const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA);
-    if (status === 'granted') {
-      console.log('hit granted access')
-    } else {
-      throw new Error('Camera permission not granted');
-    }
-  }
 
   useEffect(() => {
     getCameraPermission();

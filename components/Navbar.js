@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { navigate } from './RootNavigation';
+import { navigate } from '../utils/RootNavigation';
 
 const Navbar = (props) => {
   return (
