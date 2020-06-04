@@ -46,14 +46,10 @@ const Categories = ({navigation}) => {
 
 
   const renderCategories = () => {
-    return categories.map(category => {
-     return (
-      <Category
-        key={category.id}
-        {...category}
-        navigation={navigation}
-      />
-     );
+    return categories.map((category) => {
+      return (
+        <Category key={category.id} {...category} navigation={navigation} />
+      );
     });
   };
 
