@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { ItemContext } from '../context/itemsReducer';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Item from './Item';
+import { navigate } from "../utils/RootNavigation";
 
 const Items = ({ route, navigation }) => {
   const [{items}, dispatchItems] = useContext(
@@ -25,6 +26,18 @@ const Items = ({ route, navigation }) => {
     <View>
       <Text>Items</Text>
       {itemList}
+      <Button
+        title="add"
+        onPress={()=>{
+          navigate('ItemForm', {
+            name: '',
+            brand: '',
+            quantity: 0,
+            onList: false,
+            category_id,
+          });
+        }}
+      />
     </View>
   )
 };

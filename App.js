@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Categories from './components/Categories';
 import Items from './components/Items';
 import ItemShow from './components/ItemShow';
+import ItemForm from './components/ItemForm';
 import Navbar from './components/Navbar';
 import Scanner from './components/Scanner';
 import { NavigationContainer } from '@react-navigation/native';
@@ -42,7 +43,7 @@ export default function App() {
   return (
     <NavigationContainer ref={navigationRef} >
       <CategoryContext.Provider value={[categories, dispatchCategories]}>
-        <ItemContext.Provider value={[items, dispatchCategories]}>
+        <ItemContext.Provider value={[items, dispatchToItems]}>
           <Stack.Navigator>
             <Stack.Screen
               name='Categories'
@@ -53,12 +54,16 @@ export default function App() {
               component={Items}
             />
             <Stack.Screen
-              name='ItemShow'
+              name='Item'
               component={ItemShow}
             />
             <Stack.Screen
               name='Scanner'
               component={Scanner}
+            />
+            <Stack.Screen
+              name='ItemForm'
+              component={ItemForm}
             />
           </Stack.Navigator>
           <Navbar />

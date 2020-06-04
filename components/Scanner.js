@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Alert, Button } from 'react-native';
-import {
-  getCameraPermission,
-  checkCameraPermission,
-} from '../utils/permissions';
+import { getCameraPermission, checkCameraPermission } from '../utils/permissions'
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { navigate } from '../utils/RootNavigation';
