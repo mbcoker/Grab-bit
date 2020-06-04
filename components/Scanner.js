@@ -30,7 +30,7 @@ const Scanner = () => {
     try {
       let response = await fetch(url);
       let json = await response.json();
-      // console.log(json['products'][0]['product_name']);
+     
       const productName = json['products'][0]['product_name'];
 
       const brand = json['products'][0]['brand'];
@@ -40,6 +40,14 @@ const Scanner = () => {
       const description = json['products'][0]['description'];
 
       console.log(productName, brand, price, description);
+      navigate('ItemForm',
+      {
+        name: productName, 
+        quantity: 0, 
+        brand, 
+        category_id: null, 
+        id: null 
+      })
     } catch (error) {
       console.log(error);
     }
