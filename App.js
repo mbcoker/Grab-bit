@@ -43,7 +43,7 @@ export default function App() {
   return (
     <NavigationContainer ref={navigationRef} >
       <CategoryContext.Provider value={[categories, dispatchCategories]}>
-        <ItemContext.Provider value={[items, dispatchCategories]}>
+        <ItemContext.Provider value={[items, dispatchToItems]}>
           <Stack.Navigator>
             <Stack.Screen
               name='Categories'
