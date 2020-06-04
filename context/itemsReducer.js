@@ -10,6 +10,8 @@ export const itemState = {
     brand: 'mac',
     quantity: 1,
     category_id: 1,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 1
   },
   {
@@ -17,6 +19,8 @@ export const itemState = {
     brand: 'figi',
     quantity: 5,
     category_id: 2,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 2,
   },
   {
@@ -24,6 +28,8 @@ export const itemState = {
     brand: 'gloss company',
     quantity: 0,
     category_id: 1,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 3,
   },
   ]

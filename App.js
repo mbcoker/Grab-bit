@@ -54,7 +54,7 @@ export default function App() {
               component={Items}
             />
             <Stack.Screen
-              name='ItemShow'
+              name='Item'
               component={ItemShow}
             />
             <Stack.Screen
