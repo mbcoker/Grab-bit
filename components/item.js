@@ -7,7 +7,7 @@ const Item = (props) => {
     <Button
       title={props.name}
       onPress={()=>{
-        props.navigation.navigate('ItemShow', {...props});
+        props.navigation.navigate('Item', {...props});
       }}
     />
     </View>

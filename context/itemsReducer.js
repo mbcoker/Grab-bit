@@ -7,18 +7,24 @@ export const itemState = {
     name: 'lipstick',
     brand: 'mac',
     category_id: 1,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 1
   },
   {
     name: 'apple',
     brand: 'figi',
     category_id: 2,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 2,
   },
   {
     name: 'gloss',
     brand: 'gloss company',
     category_id: 1,
+    quantity: 1,
+    notes: 'these are some short notes about my item',
     id: 3,
   },
   ]
