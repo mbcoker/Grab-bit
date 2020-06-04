@@ -25,7 +25,7 @@ const Scanner = () => {
     setScanned(true);
     //handle request here
 
-    const url = `https://api.barcodelookup.com/v2/products?barcode=${data}&formatted=y&key=f7ks7ed91sbfgq460zjvkoi3dc22f8`;
+    const url = `https://api.barcodelookup.com/v2/products?barcode=${data}&formatted=y&key=rv4sgk3a6q1xftjat520rwwupvwpqv`;
 
     try {
       let response = await fetch(url);
