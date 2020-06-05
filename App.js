@@ -48,6 +48,7 @@ export default function App() {
             <Stack.Screen
               name='Categories'
               component={Categories}
+              style={styles.topNav}
             />
             <Stack.Screen
               name='Items'
@@ -80,5 +81,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });

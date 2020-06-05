@@ -25,12 +25,12 @@ const Scanner = () => {
     setScanned(true);
     //handle request here
 
-    const url = `https://api.barcodelookup.com/v2/products?barcode=${data}&formatted=y&key=f7ks7ed91sbfgq460zjvkoi3dc22f8`;
+    const url = `https://api.barcodelookup.com/v2/products?barcode=${data}&formatted=y&key=rv4sgk3a6q1xftjat520rwwupvwpqv`;
 
     try {
       let response = await fetch(url);
       let json = await response.json();
-      // console.log(json['products'][0]['product_name']);
+     
       const productName = json['products'][0]['product_name'];
 
       const brand = json['products'][0]['brand'];
@@ -40,6 +40,14 @@ const Scanner = () => {
       const description = json['products'][0]['description'];
 
       console.log(productName, brand, price, description);
+      navigate('ItemForm',
+      {
+        name: productName, 
+        quantity: 0, 
+        brand, 
+        category_id: null, 
+        id: null 
+      })
     } catch (error) {
       console.log(error);
     }

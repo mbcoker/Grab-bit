@@ -46,29 +46,48 @@ export const itemsReducer = (state, action) => {
 
   switch(action.type) {
     case actionTypes.SUBMIT_ITEM:
-      const { name, brand, quantity, category_id } = action.payload;
+      const { name, brand, quantity, category_id, id } = action.payload;
       lastId = state.lastId + 1;
 
       // Remove original item information if new item is the same item
+      
       
       const item = {
         name,
         brand,
         quantity,
         category_id,
-        id: lastId,
+        id: id || lastId,
       }
 
-      console.log(item)
+      let isNew = true;
+      items.forEach((el, i) => {
+        if (el.id === item.id) {
+          isNew = false;
+          items[i] = item; 
+        }
+      });
+      
 
-      items.push(item);
+      console.log(items)
+
+      if (isNew) items.push(item);
       
       return {
         ...state,
         items,
         lastId,
       }
-
+    case actionTypes.REMOVE_ITEM: 
+      items = items.filter(item => {
+        if(category_id === item.category_id) {
+          return payload.id !== item.id 
+        }
+      })
+      return {
+        ...state,
+        items,
+      }
     default: 
     return state
   }
