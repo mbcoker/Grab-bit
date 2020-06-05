@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Category from './Category';
 import { CategoryContext } from '../context/categoriesReducer';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, TextInput} from 'react-native';
 import { addCategory } from '../context/actions';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Button} from 'react-native-elements';
 
 const Categories = ({navigation}) => {
   const [{categories}, dispatchCategories] = useContext(
@@ -27,16 +29,33 @@ const Categories = ({navigation}) => {
     setToggle(!toggle)
   }
 
+  const renderInputButton = () => {
+    if(toggle) {
+      return <Button onPress={handleToggle} icon={<MaterialIcons name="cancel" size={24} color="white" onPress={handleToggle}/>} />
+      // return <MaterialIcons name="cancel" size={24} color="black" onPress={handleToggle}/>
+    } else {
+      return <Button
+      title="+"
+      onPress={handleToggle}
+    />
+      // return <MaterialIcons name="add" size={24} color="black" onPress={handleToggle}/>
+    }
+  }
+
   const renderInput = () => {
     if(toggle) {
       return (
         <View>
-          <TextInput 
-            onChangeText={(text) => setCategoryName(text)}
-            value={categoryName}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput 
+              placeholder={"Add Category"}
+              style={styles.input}
+              onChangeText={(text) => setCategoryName(text)}
+              value={categoryName}
+            />
+          </View>
           <Button 
-            title='+'
+            title='Save'
             onPress={handleSubmit}
           />
         </View>
@@ -54,20 +73,46 @@ const Categories = ({navigation}) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <View>
         {renderInput()}
       </View>
-      <Text>Categories</Text>
+      {/* <Button
+        style={toggle ? styles.cancel : styles.add}
+        title={toggle ? 'cancel' : '+'}
+        onPress={handleToggle}
+      /> */}
       <View>
         {renderCategories()}
       </View>
-      <Button
-        title={toggle ? 'cancel' : 'add'}
-        onPress={handleToggle}
-      />
-    </View>
+      <View >
+        {renderInputButton()}
+      </View>
+    </ScrollView>
   );
 };
 
 export default Categories;
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    height: 45,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    fontSize: 30,
+    backgroundColor: '#ffffff',
+    paddingLeft: 15,
+    paddingRight: 15,
+    width: 300,
+  },
+  inputButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: '30'
+  }
+})

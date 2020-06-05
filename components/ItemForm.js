@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {TextInput, View, Text, Button, Picker} from 'react-native';
+import {TextInput, View, Text, Button, Picker, StyleSheet} from 'react-native';
 import { CategoryContext } from '../context/categoriesReducer';
 import { ItemContext } from "../context/itemsReducer";
 import { navigate } from '../utils/RootNavigation';
@@ -66,8 +66,14 @@ const ItemForm = ({route}) => {
   return (
     <View>
       <TextInput
+        style={styles.input}
         onChangeText={(text) => setItemName(text)}
         value={itemName}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => setItemBrand(text)}
+        value={itemBrand}
       />
       <Picker
         selectedValue={selectedValue}
@@ -75,10 +81,6 @@ const ItemForm = ({route}) => {
       >
         {pickerItems}
       </Picker>
-      <TextInput
-        onChangeText={(text) => setItemBrand(text)}
-        value={itemBrand}
-      />
       <Text>Quantity: {itemQuantity}</Text>
       <Button 
         title="+"
@@ -95,5 +97,17 @@ const ItemForm = ({route}) => {
     </View>
   )
 };
+
+const styles = StyleSheet.create({
+  
+  input: {
+    height: 40,
+    fontSize: 30,
+    backgroundColor: '#ffffff',
+    paddingLeft: 15,
+    paddingRight: 15,
+    width: '100%',
+  },
+});
 
 export default ItemForm;

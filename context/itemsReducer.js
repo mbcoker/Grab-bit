@@ -78,7 +78,16 @@ export const itemsReducer = (state, action) => {
         items,
         lastId,
       }
-
+    case actionTypes.REMOVE_ITEM: 
+      items = items.filter(item => {
+        if(category_id === item.category_id) {
+          return payload.id !== item.id 
+        }
+      })
+      return {
+        ...state,
+        items,
+      }
     default: 
     return state
   }
